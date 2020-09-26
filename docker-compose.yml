@@ -1,0 +1,17 @@
+version: "3"
+
+services:
+  nodeapp:
+    build: .
+    container_name: nodeapp
+    restart: unless-stopped
+    env_file: .env
+    environment:
+      # - MONGO_USERNAME=$MONGO_USERNAME
+      - NODE_ENV=production
+    ports:
+      - "56000:3500"
+    volumes:
+      - .:/usr/src/nodeapp
+      - /usr/src/nodeapp/node_modules
+    command: '/bin/bash -c "npm i && npm run start:dev"'
